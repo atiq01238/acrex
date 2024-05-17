@@ -11,11 +11,6 @@
 </head>
 
 <body>
-    <div class="nav-item app-btn mt-4" style="float: right; margin-right: 40px !important;">
-        <a href="{{ url('/register') }}" style="color: white;">
-            Register
-        </a>
-    </div>
     <nav class="navbar">
         <a href="{{ url('/') }}" class="logo">
             <img src="{{ asset('assets/images/logo.png') }}" alt="ACREX">
@@ -24,13 +19,19 @@
             <div class="nav-item app-btn">
                 <img src="{{ asset('assets/svg/app.svg') }}"> App
             </div>
-            <div class="nav-item nav-icon-container">
+            <div class="nav-item nav-icon-container" style="float: left;">
                 <img src="{{ asset('assets/svg/lang.svg') }}">
                 <img src="{{ asset('assets/svg/bell.svg') }}">
                 <img src="{{ asset('assets/svg/envelop.svg') }}">
             </div>
+            <div class="nav-item app-btn mt-4"  style="margin-bottom: 150px !important;" >
+                <a href="{{ url('/register') }}" style="color: white;">
+                    Register
+                </a>
+            </div>
         </div>
     </nav>
+
     <div class="main-content">
         <div class="basic-frame gradient-frame">
             <div class="frame-main-item">
@@ -70,7 +71,7 @@
                 <img src="{{ asset('assets/svg/share.svg') }}">
                 <div>Share Friends</div>
             </a>
-            <a  class="frame-link-item">
+            <a href="" class="frame-link-item">
                 <img src="{{ asset('assets/svg/team.svg') }}">
                 <div>Team</div>
             </a>
@@ -165,57 +166,55 @@
             </div>
 
             <div class="inner-section">
-                <div class="item">
-                    <div class="item-pt-1">
-                        <div class="img-cont">
-                            <img src="{{ asset('assets/svg/bitcoin.svg') }}">
-
+                <a href="{{ url('/order') }}?coin=BTC" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="item">
+                        <div class="item-pt-1">
+                            <div class="img-cont">
+                                <img src="{{ asset('assets/svg/bitcoin.svg') }}">
+                            </div>
+                            <div>
+                                <div class="btc-usd">BTC/USD</div>
+                                <div class="btcn">Bitcoin</div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="btc-usd">BTC/USD</div>
-                            <div class="btcn">Bitcoin</div>
-                        </div>
-                    </div>
-                    <div class="item-pt-2">
-                        <div class="img-cont">
-                            <img src="{{ asset('assets/svg/line.svg') }}">
-
-                        </div>
-                        <div class="prc-up-cont">
-                            <div class="prc">$59,389.64</div>
-                            <div class="up-down-btn"> <img src="{{ asset('assets/svg/up.svg') }}"> 15.3%
+                        <div class="item-pt-2">
+                            <div class="img-cont">
+                                <img src="{{ asset('assets/svg/line.svg') }}">
+                            </div>
+                            <div class="prc-up-cont">
+                                <div class="prc">$59,389.64</div>
+                                <div class="up-down-btn"> <img src="{{ asset('assets/svg/up.svg') }}"> 15.3%</div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="item-pt-1">
-                        <div class="img-cont">
-                            <img src="{{ asset('assets/svg/eth.svg') }}">
-
+                </a>
+                <a href="{{ url('/order') }}?coin=ETH" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="item">
+                        <div class="item-pt-1">
+                            <div class="img-cont">
+                                <img src="{{ asset('assets/svg/eth.svg') }}">
+                            </div>
+                            <div>
+                                <div class="btc-usd">ETH/BUSD</div>
+                                <div class="btcn">Etherium</div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="btc-usd">ETH/BUSD</div>
-                            <div class="btcn">Etherium</div>
-                        </div>
-                    </div>
-                    <div class="item-pt-2">
-                        <div class="img-cont">
-                            <img src="{{ asset('assets/svg/line-2.svg') }}">
-
-                        </div>
-                        <div class="prc-up-cont">
-                            <div class="prc">$4,392.19</div>
-                            <div class="up-down-btn red-bg"> <img src="{{ asset('assets/svg/down.svg') }}"> -23.3%
+                        <div class="item-pt-2">
+                            <div class="img-cont">
+                                <img src="{{ asset('assets/svg/line-2.svg') }}">
+                            </div>
+                            <div class="prc-up-cont">
+                                <div class="prc">$4,392.19</div>
+                                <div class="up-down-btn red-bg"> <img src="{{ asset('assets/svg/down.svg') }}"> -23.3%</div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="item">
+                </a>
+                <a href="{{ url('/order') }}?coin=TRX" style="text-decoration: none; color: inherit; display: block;">
+                   <div class="item">
                     <div class="item-pt-1">
                         <div class="img-cont">
                             <img src="{{ asset('assets/svg/tron.svg') }}">
-
                         </div>
                         <div>
                             <div class="btc-usd">TRX/BUSD</div>
@@ -225,20 +224,19 @@
                     <div class="item-pt-2">
                         <div class="img-cont">
                             <img src="{{ asset('assets/svg/line-2.svg') }}">
-
                         </div>
                         <div class="prc-up-cont">
                             <div class="prc">$3,399.61</div>
-                            <div class="up-down-btn red-bg"> <img src="{{ asset('assets/svg/down.svg') }}"> -29.1%
-                            </div>
+                            <div class="up-down-btn red-bg"> <img src="{{ asset('assets/svg/down.svg') }}"> -29.1%</div>
                         </div>
                     </div>
                 </div>
-                <div class="item">
+                </a>
+                <a href="{{ url('/order') }}?coin=USDT" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="item">
                     <div class="item-pt-1">
                         <div class="img-cont">
                             <img src="{{ asset('assets/svg/tether.svg') }}">
-
                         </div>
                         <div>
                             <div class="btc-usd">USDT/BUSD</div>
@@ -248,20 +246,19 @@
                     <div class="item-pt-2">
                         <div class="img-cont">
                             <img src="{{ asset('assets/svg/line.svg') }}">
-
                         </div>
                         <div class="prc-up-cont">
                             <div class="prc">$49,392.19</div>
-                            <div class="up-down-btn"> <img src="{{ asset('assets/svg/up.svg') }}"> 25.3%
-                            </div>
+                            <div class="up-down-btn"> <img src="{{ asset('assets/svg/up.svg') }}"> 25.3%</div>
                         </div>
                     </div>
                 </div>
-                <div class="item">
+                </a>
+                <a href="{{ url('/order') }}?coin=XRP" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="item">
                     <div class="item-pt-1">
                         <div class="img-cont">
                             <img src="{{ asset('assets/svg/ripple.svg') }}">
-
                         </div>
                         <div>
                             <div class="btc-usd">XRP/BUSD</div>
@@ -271,17 +268,16 @@
                     <div class="item-pt-2">
                         <div class="img-cont">
                             <img src="{{ asset('assets/svg/line.svg') }}">
-
                         </div>
                         <div class="prc-up-cont">
                             <div class="prc">$29,312.12</div>
-                            <div class="up-down-btn"> <img src="{{ asset('assets/svg/up.svg') }}"> 15.9%
-                            </div>
+                            <div class="up-down-btn"> <img src="{{ asset('assets/svg/up.svg') }}"> 15.9%</div>
                         </div>
                     </div>
                 </div>
-
+                </a>
             </div>
+
         </div>
 
 

@@ -44,13 +44,12 @@
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text"
                                             class="form-control form-control-user @error('name') border border-danger @enderror"
-                                            name="name" id="exampleFirstName" placeholder=" Name"
+                                            name="name" id="exampleFirstName" placeholder="Name"
                                             value="{{ old('name') }}">
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-
                                 </div>
                                 <div class="form-group">
                                     <input type="email"
@@ -71,12 +70,23 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                    <div class="col-sm-6">
+                                        <input type="text"
+                                            class="form-control form-control-user @error('referral_code') border border-danger @enderror"
+                                            name="referral_code" id="referral_code" placeholder="Referral Code (Optional)"
+                                            value="{{ old('referral_code') }}">
+                                        @error('referral_code')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
+
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
                                     Register Account
                                 </button>
                                 <hr>
                             </form>
+
                             <hr>
                             <div class="text-center">
                                 <a class="small" href="{{ url('login') }}">Already have an account? Login!</a>

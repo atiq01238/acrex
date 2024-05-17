@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use App\Models\Referral;
 
 
 class AuthController extends Controller
@@ -35,14 +37,28 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email|max:255',
             'password' => 'required|string|min:8',
+            'referral_code' => 'nullable|string|exists:users,referral_code',
         ]);
+
+
+        $referralCode = Str::random(8);
 
         $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
+            'referral_code' => $referralCode,
         ]);
 
+        if ($validatedData['referral_code']) {
+            $referredBy = User::where('referral_code', $validatedData['referral_code'])->first();
+            if ($referredBy) {
+                $referral = new Referral();
+                $referral->user_id = $referredBy->id;
+                $referral->referred_user_id = $user->id;
+                $referral->save();
+            }
+        }
 
         return redirect()->route('auth.login')->with('success', 'Account created successfully!');
     }

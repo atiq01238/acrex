@@ -46,7 +46,13 @@
                 <div class="code-box">
                     <div class="mbl-img"><img src="{{ asset('assets/svg/mobile.svg') }}" alt=""></div>
                     <div style="font-size: 3.5vw;">Invite code</div>
-                    <div class="user-code">982731</div>
+                    @auth
+                        @if(auth()->user()->referral_code)
+                            <div class="user-code"  style="font-size: 50px;">{{ auth()->user()->referral_code }}</div>
+                        @else
+                            <div class="user-code"  style="font-size: 50px;">No referral code available</div>
+                        @endif
+                    @endauth
                 </div>
 
                 <div class="qr-box">

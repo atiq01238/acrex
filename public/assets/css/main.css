@@ -986,7 +986,7 @@ footer ul li {
 }
 
 .h2{
-     
+
     --linear-gradient-variable: linear-gradient(272.48deg, #85EAFE -23.79%, #525AC1 99.94%);
     background: linear-gradient(272.48deg, #85EAFE -23.79%, #525AC1 99.94%);
     -webkit-background-clip: text;
