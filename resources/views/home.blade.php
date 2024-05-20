@@ -182,12 +182,39 @@
                                 <img src="{{ asset('assets/svg/line.svg') }}">
                             </div>
                             <div class="prc-up-cont">
-                                <div class="prc">$59,389.64</div>
-                                <div class="up-down-btn"> <img src="{{ asset('assets/svg/up.svg') }}"> 15.3%</div>
+                                <div class="prc" id="btc-price"></div>
+                                <div class="up-down-btn">
+                                    <img src="{{ asset('assets/svg/up.svg') }}" id="btc-trend-icon"> <span id="btc-change">15.3%</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </a>
+                <script>
+                    async function fetchBitcoinPrice() {
+                        try {
+                            const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true');
+                            const data = await response.json();
+
+                            const price = data.bitcoin.usd;
+                            const change = data.bitcoin.usd_24h_change.toFixed(2);
+
+                            document.getElementById('btc-price').innerText = `$${price.toLocaleString()}`;
+                            document.getElementById('btc-change').innerText = `${change}%`;
+
+                            const trendIcon = document.getElementById('btc-trend-icon');
+                            if (change >= 0) {
+                                trendIcon.src = "{{ asset('assets/svg/up.svg') }}";
+                            } else {
+                                trendIcon.src = "{{ asset('assets/svg/down.svg') }}";
+                            }
+                        } catch (error) {
+                            console.error('Error fetching Bitcoin price:', error);
+                        }
+                    }
+
+                    document.addEventListener('DOMContentLoaded', fetchBitcoinPrice);
+                </script>
                 <a href="{{ url('/order') }}?coin=ETH" style="text-decoration: none; color: inherit; display: block;">
                     <div class="item">
                         <div class="item-pt-1">
@@ -196,7 +223,7 @@
                             </div>
                             <div>
                                 <div class="btc-usd">ETH/BUSD</div>
-                                <div class="btcn">Etherium</div>
+                                <div class="btcn">Ethereum</div>
                             </div>
                         </div>
                         <div class="item-pt-2">
@@ -204,78 +231,204 @@
                                 <img src="{{ asset('assets/svg/line-2.svg') }}">
                             </div>
                             <div class="prc-up-cont">
-                                <div class="prc">$4,392.19</div>
-                                <div class="up-down-btn red-bg"> <img src="{{ asset('assets/svg/down.svg') }}"> -23.3%</div>
+                                <div class="prc" id="eth-price">$4,392.19</div>
+                                <div class="up-down-btn red-bg">
+                                    <img src="{{ asset('assets/svg/down.svg') }}" id="eth-trend-icon"> <span id="eth-change">-23.3%</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </a>
+                <script>
+                    async function fetchEthereumPrice() {
+                        try {
+                            const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&include_24hr_change=true');
+                            const data = await response.json();
+
+                            const price = data.ethereum.usd;
+                            const change = data.ethereum.usd_24h_change.toFixed(2);
+
+                            document.getElementById('eth-price').innerText = `$${price.toLocaleString()}`;
+                            document.getElementById('eth-change').innerText = `${change}%`;
+
+                            const trendIcon = document.getElementById('eth-trend-icon');
+                            if (change >= 0) {
+                                trendIcon.src = "{{ asset('assets/svg/up.svg') }}";
+                                document.querySelector('.up-down-btn').classList.remove('red-bg');
+                            } else {
+                                trendIcon.src = "{{ asset('assets/svg/down.svg') }}";
+                                document.querySelector('.up-down-btn').classList.add('red-bg');
+                            }
+                        } catch (error) {
+                            console.error('Error fetching Ethereum price:', error);
+                        }
+                    }
+
+                    // Fetch the Ethereum price when the page loads
+                    document.addEventListener('DOMContentLoaded', fetchEthereumPrice);
+                </script>
                 <a href="{{ url('/order') }}?coin=TRX" style="text-decoration: none; color: inherit; display: block;">
-                   <div class="item">
-                    <div class="item-pt-1">
-                        <div class="img-cont">
-                            <img src="{{ asset('assets/svg/tron.svg') }}">
+                    <div class="item">
+                        <div class="item-pt-1">
+                            <div class="img-cont">
+                                <img src="{{ asset('assets/svg/tron.svg') }}">
+                            </div>
+                            <div>
+                                <div class="btc-usd">TRX/BUSD</div>
+                                <div class="btcn">TRON</div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="btc-usd">TRX/BUSD</div>
-                            <div class="btcn">TRON</div>
+                        <div class="item-pt-2">
+                            <div class="img-cont">
+                                <img src="{{ asset('assets/svg/line-2.svg') }}">
+                            </div>
+                            <div class="prc-up-cont">
+                                <div class="prc" id="trx-price">$3,399.61</div>
+                                <div class="up-down-btn red-bg">
+                                    <img src="{{ asset('assets/svg/down.svg') }}" id="trx-trend-icon"> <span id="trx-change">-29.1%</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="item-pt-2">
-                        <div class="img-cont">
-                            <img src="{{ asset('assets/svg/line-2.svg') }}">
-                        </div>
-                        <div class="prc-up-cont">
-                            <div class="prc">$3,399.61</div>
-                            <div class="up-down-btn red-bg"> <img src="{{ asset('assets/svg/down.svg') }}"> -29.1%</div>
-                        </div>
-                    </div>
-                </div>
                 </a>
+                <script>
+                    async function fetchTRONPrice() {
+                        try {
+                            const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=tron&vs_currencies=usd&include_24hr_change=true');
+                            const data = await response.json();
+
+                            const price = data.tron.usd;
+                            const change = data.tron.usd_24h_change.toFixed(2);
+
+                            document.getElementById('trx-price').innerText = `$${price.toLocaleString()}`;
+                            document.getElementById('trx-change').innerText = `${change}%`;
+
+                            const trendIcon = document.getElementById('trx-trend-icon');
+                            const upDownBtn = document.querySelector('.up-down-btn');
+
+                            if (change >= 0) {
+                                trendIcon.src = "{{ asset('assets/svg/up.svg') }}";
+                                upDownBtn.classList.remove('red-bg');
+                            } else {
+                                trendIcon.src = "{{ asset('assets/svg/down.svg') }}";
+                                upDownBtn.classList.add('red-bg');
+                            }
+                        } catch (error) {
+                            console.error('Error fetching TRON price:', error);
+                        }
+                    }
+
+                    // Fetch the TRON price when the page loads
+                    document.addEventListener('DOMContentLoaded', fetchTRONPrice);
+                </script>
                 <a href="{{ url('/order') }}?coin=USDT" style="text-decoration: none; color: inherit; display: block;">
                     <div class="item">
-                    <div class="item-pt-1">
-                        <div class="img-cont">
-                            <img src="{{ asset('assets/svg/tether.svg') }}">
+                        <div class="item-pt-1">
+                            <div class="img-cont">
+                                <img src="{{ asset('assets/svg/tether.svg') }}">
+                            </div>
+                            <div>
+                                <div class="btc-usd">USDT/BUSD</div>
+                                <div class="btcn">Tether</div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="btc-usd">USDT/BUSD</div>
-                            <div class="btcn">Tether</div>
+                        <div class="item-pt-2">
+                            <div class="img-cont">
+                                <img src="{{ asset('assets/svg/line.svg') }}">
+                            </div>
+                            <div class="prc-up-cont">
+                                <div class="prc" id="usdt-price">$49,392.19</div>
+                                <div class="up-down-btn">
+                                    <img src="{{ asset('assets/svg/up.svg') }}" id="usdt-trend-icon"> <span id="usdt-change">25.3%</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="item-pt-2">
-                        <div class="img-cont">
-                            <img src="{{ asset('assets/svg/line.svg') }}">
-                        </div>
-                        <div class="prc-up-cont">
-                            <div class="prc">$49,392.19</div>
-                            <div class="up-down-btn"> <img src="{{ asset('assets/svg/up.svg') }}"> 25.3%</div>
-                        </div>
-                    </div>
-                </div>
                 </a>
+                <script>
+                    async function fetchTetherPrice() {
+                        try {
+                            const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=usd&include_24hr_change=true');
+                            const data = await response.json();
+
+                            const price = data.tether.usd;
+                            const change = data.tether.usd_24h_change.toFixed(2);
+
+                            document.getElementById('usdt-price').innerText = `$${price.toLocaleString()}`;
+                            document.getElementById('usdt-change').innerText = `${change}%`;
+
+                            const trendIcon = document.getElementById('usdt-trend-icon');
+                            const upDownBtn = document.querySelector('.up-down-btn');
+
+                            if (change >= 0) {
+                                trendIcon.src = "{{ asset('assets/svg/up.svg') }}";
+                                upDownBtn.classList.remove('red-bg');
+                            } else {
+                                trendIcon.src = "{{ asset('assets/svg/down.svg') }}";
+                                upDownBtn.classList.add('red-bg');
+                            }
+                        } catch (error) {
+                            console.error('Error fetching Tether price:', error);
+                        }
+                    }
+
+                    // Fetch the Tether price when the page loads
+                    document.addEventListener('DOMContentLoaded', fetchTetherPrice);
+                </script>
                 <a href="{{ url('/order') }}?coin=XRP" style="text-decoration: none; color: inherit; display: block;">
                     <div class="item">
-                    <div class="item-pt-1">
-                        <div class="img-cont">
-                            <img src="{{ asset('assets/svg/ripple.svg') }}">
+                        <div class="item-pt-1">
+                            <div class="img-cont">
+                                <img src="{{ asset('assets/svg/ripple.svg') }}">
+                            </div>
+                            <div>
+                                <div class="btc-usd">XRP/BUSD</div>
+                                <div class="btcn">Ripple</div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="btc-usd">XRP/BUSD</div>
-                            <div class="btcn">Ripple</div>
+                        <div class="item-pt-2">
+                            <div class="img-cont">
+                                <img src="{{ asset('assets/svg/line.svg') }}">
+                            </div>
+                            <div class="prc-up-cont">
+                                <div class="prc" id="xrp-price">$29,312.12</div>
+                                <div class="up-down-btn">
+                                    <img src="{{ asset('assets/svg/up.svg') }}" id="xrp-trend-icon"> <span id="xrp-change">15.9%</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="item-pt-2">
-                        <div class="img-cont">
-                            <img src="{{ asset('assets/svg/line.svg') }}">
-                        </div>
-                        <div class="prc-up-cont">
-                            <div class="prc">$29,312.12</div>
-                            <div class="up-down-btn"> <img src="{{ asset('assets/svg/up.svg') }}"> 15.9%</div>
-                        </div>
-                    </div>
-                </div>
                 </a>
+                <script>
+                    async function fetchRipplePrice() {
+                        try {
+                            const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd&include_24hr_change=true');
+                            const data = await response.json();
+
+                            const price = data.ripple.usd;
+                            const change = data.ripple.usd_24h_change.toFixed(2);
+
+                            document.getElementById('xrp-price').innerText = `$${price.toLocaleString()}`;
+                            document.getElementById('xrp-change').innerText = `${change}%`;
+
+                            const trendIcon = document.getElementById('xrp-trend-icon');
+                            const upDownBtn = document.querySelector('.up-down-btn');
+
+                            if (change >= 0) {
+                                trendIcon.src = "{{ asset('assets/svg/up.svg') }}";
+                                upDownBtn.classList.remove('red-bg');
+                            } else {
+                                trendIcon.src = "{{ asset('assets/svg/down.svg') }}";
+                                upDownBtn.classList.add('red-bg');
+                            }
+                        } catch (error) {
+                            console.error('Error fetching Ripple price:', error);
+                        }
+                    }
+
+                    // Fetch the Ripple price when the page loads
+                    document.addEventListener('DOMContentLoaded', fetchRipplePrice);
+                </script>
             </div>
 
         </div>
